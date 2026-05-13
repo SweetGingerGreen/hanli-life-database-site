@@ -12,10 +12,13 @@
 
 # testing
 /coverage
+/.lighthouseci
+/test-results
 
 # next.js
 /.next/
 /out/
+/public/fonts/
 
 # production
 /build
@@ -35,6 +38,12 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# cloudflare
+.wrangler
+
+# local task handoff
+CODEX_TASKS.md
 
 # typescript
 *.tsbuildinfo

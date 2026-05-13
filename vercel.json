@@ -1,0 +1,15 @@
+{
+  "regions": ["hkg1"],
+  "env": {
+    "DATABASE_PATH": "./data/han-li.sqlite"
+  },
+  "functions": {
+    "src/app/cards/[card]/opengraph-image.tsx": {
+      "memory": 1024,
+      "includeFiles": "{public/fonts/**,data/**}"
+    },
+    "src/app/**/*.tsx": {
+      "includeFiles": "data/**"
+    }
+  }
+}
