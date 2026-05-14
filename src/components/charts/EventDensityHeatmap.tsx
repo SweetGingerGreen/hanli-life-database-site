@@ -1,16 +1,17 @@
 // src/components/charts/EventDensityHeatmap.tsx — server component
 import type { RealmProfile } from "@/lib/types";
 import { railVar } from "@/lib/labels";
+import type { Locale } from "@/lib/i18n";
 
 const BUCKETS = 20;
 const LANES = [
-  { key: "battles",       label: "战斗", rail: "cinnabar" },
-  { key: "treasures",     label: "宝物", rail: "gold" },
-  { key: "relationships", label: "结识", rail: "moss" },
-  { key: "secretRealms",  label: "秘境", rail: "jade" },
+  { key: "battles",       zh: "战斗", en: "Battle", rail: "cinnabar" },
+  { key: "treasures",     zh: "宝物", en: "Treasure", rail: "gold" },
+  { key: "relationships", zh: "结识", en: "Social", rail: "moss" },
+  { key: "secretRealms",  zh: "秘境", en: "Secret realm", rail: "jade" },
 ] as const;
 
-export function EventDensityHeatmap({ realms }: { realms: RealmProfile[] }) {
+export function EventDensityHeatmap({ realms, locale = "zh" }: { realms: RealmProfile[]; locale?: Locale }) {
   function bucketValue(laneKey: keyof RealmProfile, b: number) {
     const start = (b / BUCKETS) * 1324 + 1;
     const end = ((b + 1) / BUCKETS) * 1324;
@@ -42,12 +43,12 @@ export function EventDensityHeatmap({ realms }: { realms: RealmProfile[] }) {
       <div className="heat">
         {lanes.map(lane => (
           <div key={lane.key} className="heat__row">
-            <div className="heat__label" style={{ color: railVar(lane.rail) }}>{lane.label}</div>
+            <div className="heat__label" style={{ color: railVar(lane.rail) }}>{locale === "en" ? lane.en : lane.zh}</div>
             <div className="heat__cells">
               {lane.values.map((v, i) => (
                 <div key={i} className="heat__cell"
                      style={{ background: bg(lane.rail, v) }}
-                     title={`bucket ${i + 1}: ~${v.toFixed(0)} 事件`} />
+                     title={`bucket ${i + 1}: ~${v.toFixed(0)} ${locale === "en" ? "events" : "事件"}`} />
               ))}
             </div>
           </div>

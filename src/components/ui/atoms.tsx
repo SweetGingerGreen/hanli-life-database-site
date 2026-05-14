@@ -2,6 +2,7 @@
 
 import type { EventType, EventFlag } from "@/lib/types";
 import { TYPE_META, railVar } from "@/lib/labels";
+import { FLAG_LABELS, eventTypeLabel, label, type Locale } from "@/lib/i18n";
 
 export function Eyebrow({ zh, en, rail }: { zh?: string; en?: string; rail?: string }) {
   return (
@@ -36,26 +37,26 @@ export function SectionHeader({
   );
 }
 
-export function EventTypeTag({ type }: { type: EventType }) {
-  const m = TYPE_META[type] ?? TYPE_META.other;
+export function EventTypeTag({ type, locale = "zh" }: { type: EventType; locale?: Locale }) {
+  const rail = (TYPE_META[type] ?? TYPE_META.other).rail;
   return (
-    <span className={`event-tag ${type}`}>
+    <span className={`event-tag ${type}`} data-rail={rail}>
       <span className="glyph" />
-      {m.zh}
+      {eventTypeLabel(type, locale)}
     </span>
   );
 }
 
-export function ConfPill({ conf, review }: { conf: number; review?: boolean }) {
+export function ConfPill({ conf, review, locale = "zh" }: { conf: number; review?: boolean; locale?: Locale }) {
   let level: "high" | "mid" | "low" = "high";
-  let label = "高置信";
-  if (conf < 0.6)       { level = "low";  label = "估算"; }
-  else if (conf < 0.75) { level = "mid";  label = "中等"; }
-  if (review) { level = "low"; label = "待复核"; }
+  let text = label(locale, "高置信", "high");
+  if (conf < 0.6)       { level = "low";  text = label(locale, "估算", "estimated"); }
+  else if (conf < 0.75) { level = "mid";  text = label(locale, "中等", "medium"); }
+  if (review) { level = "low"; text = label(locale, "待复核", "review"); }
   return (
     <span className={`pill ${level}`}>
       <span style={{ fontFamily: "var(--font-mono)", fontWeight: 700 }}>{conf.toFixed(2)}</span>
-      <span style={{ opacity: 0.8 }}>{label}</span>
+      <span style={{ opacity: 0.8 }}>{text}</span>
     </span>
   );
 }
@@ -69,15 +70,13 @@ export function Dot({ rail = "ink" }: { rail?: string }) {
   );
 }
 
-export function FlagChipLabel({ flag }: { flag: EventFlag }) {
-  const map: Record<EventFlag, [string, string]> = {
-    battle: ["战", "cinnabar"], kill: ["杀", "cinnabar"], flee: ["逃", "cinnabar"],
-    near_death: ["危", "cinnabar"], betrayed: ["叛", "cinnabar"], injury: ["伤", "cinnabar"],
-    treasure: ["宝", "gold"], refining: ["丹", "gold"], lifespan: ["寿", "gold"],
-    secret_realm: ["秘", "jade"], seclusion: ["闭", "ink"], relationship: ["友", "moss"],
-  };
-  const [zh, rail] = map[flag] ?? [flag, "ink"];
-  return <span className={`chip ${rail}`} style={{ padding: "2px 6px" }}>{zh}</span>;
+export function FlagChipLabel({ flag, locale = "zh" }: { flag: EventFlag; locale?: Locale }) {
+  const meta = FLAG_LABELS[flag] ?? { shortZh: flag, shortEn: flag, rail: "ink" };
+  return (
+    <span className={`chip ${meta.rail}`} style={{ padding: "2px 6px" }}>
+      {locale === "en" ? meta.shortEn : meta.shortZh}
+    </span>
+  );
 }
 
 export function fmt(n: number | null | undefined): string {

@@ -1,16 +1,10 @@
 // src/app/cards/page.tsx — preview grid of the 4 share cards
 import { SectionHeader } from "@/components/ui/atoms";
+import { SHARE_CARDS } from "@/lib/cards";
 import Image from "next/image";
 import Link from "next/link";
 
 export const revalidate = 604800;
-
-const CARDS = [
-  { slug: "resume-yuanying-mid", title: "阶段履历卡 · 元婴中期", sub: "LIFE-PHASE RESUME" },
-  { slug: "profile-jiedan-1",    title: "境界档案卡 · 结丹初期", sub: "REALM PROFILE" },
-  { slug: "risk-annual",         title: "风险年报卡 · 全局",     sub: "RISK ANNUAL" },
-  { slug: "seclusion-ledger",    title: "资产清单卡 · 闭关年报", sub: "ASSET LEDGER · DARK" },
-];
 
 export default function CardsPage() {
   return (
@@ -21,11 +15,11 @@ export default function CardsPage() {
         meta="4 TEMPLATES · NEXT/OG"
       />
       <div className="cards-grid">
-        {CARDS.map(c => (
+        {SHARE_CARDS.map(c => (
           <div className="share-card-frame" key={c.slug}>
             <div className="crumb">
               <div style={{ display: "flex", gap: 12 }}>
-                <span style={{ color: "var(--ink)" }}>{c.title}</span>
+                <span style={{ color: "var(--ink)" }}>{c.zh}</span>
                 <span>{c.sub}</span>
               </div>
               <div className="actions">
@@ -36,7 +30,7 @@ export default function CardsPage() {
             <div className="share-stage">
               <Image
                 src={`/cards/${c.slug}/opengraph-image`}
-                alt={c.title}
+                alt={c.zh}
                 width={1200}
                 height={630}
                 unoptimized

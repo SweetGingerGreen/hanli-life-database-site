@@ -1,5 +1,6 @@
 // src/components/charts/RealmProgression.tsx — server component, SVG
 import type { RealmProfile } from "@/lib/types";
+import { realmLabel, type Locale } from "@/lib/i18n";
 
 const TIER_MAP: Record<string, number> = {
   "凡人": 0,
@@ -12,6 +13,7 @@ const TIER_MAP: Record<string, number> = {
   "化神": 5,
 };
 const TIER_LABELS = ["凡人", "炼气", "筑基", "结丹", "元婴", "化神"];
+const TIER_LABELS_EN = ["Mortal", "Qi", "Foundation", "Core", "Soul", "Deity"];
 
 const BREAKTHROUGHS = [
   { ch: 216, label: "筑基" },
@@ -20,7 +22,7 @@ const BREAKTHROUGHS = [
   { ch: 1252, label: "化神" },
 ];
 
-export function RealmProgression({ realms }: { realms: RealmProfile[] }) {
+export function RealmProgression({ realms, locale = "zh" }: { realms: RealmProfile[]; locale?: Locale }) {
   const W = 900, H = 280;
   const pad = { l: 48, r: 24, t: 12, b: 28 };
   const innerW = W - pad.l - pad.r;
@@ -42,13 +44,14 @@ export function RealmProgression({ realms }: { realms: RealmProfile[] }) {
   return (
     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet"
          style={{ width: "100%", height: "auto", display: "block" }}>
-      {TIER_LABELS.map((label, i) => {
+      {TIER_LABELS.map((tier, i) => {
         const y = H - pad.b - (i / maxTier) * innerH;
+        const tierLabel = locale === "en" ? TIER_LABELS_EN[i] : tier;
         return (
           <g key={i}>
             <line x1={pad.l} x2={W - pad.r} y1={y} y2={y} stroke="var(--rule)" strokeDasharray="2 3" />
             <text x={pad.l - 8} y={y + 4} textAnchor="end" fontSize="11"
-                  fontFamily="var(--font-display)" fill="var(--ink-faint)" fontWeight="700">{label}</text>
+                  fontFamily="var(--font-display)" fill="var(--ink-faint)" fontWeight="700">{tierLabel}</text>
           </g>
         );
       })}
@@ -71,7 +74,7 @@ export function RealmProgression({ realms }: { realms: RealmProfile[] }) {
             <line x1={x} x2={x} y1={pad.t + 4} y2={H - pad.b - 4}
                   stroke="var(--cinnabar)" strokeWidth="1" strokeDasharray="3 3" opacity="0.55" />
             <text x={x + 4} y={pad.t + 14} fontSize="11" fontFamily="var(--font-display)"
-                  fontWeight="900" fill="var(--cinnabar)">{m.label}</text>
+                  fontWeight="900" fill="var(--cinnabar)">{realmLabel(m.label, locale)}</text>
             <text x={x + 4} y={pad.t + 26} fontSize="9" fontFamily="var(--font-mono)"
                   fill="var(--cinnabar-deep)">ch{m.ch}</text>
           </g>

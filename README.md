@@ -4,6 +4,8 @@
 
 线上站点：[https://hanli-life-database.pages.dev](https://hanli-life-database.pages.dev)
 
+英文版：[https://hanli-life-database.pages.dev/en](https://hanli-life-database.pages.dev/en)
+
 ## 当前数据规模
 
 - 1324 条章节记录
@@ -23,6 +25,8 @@
 - `/realms/[slug]` 单境界详情：该境界内的完整事件流
 - `/cards` 分享卡：1200x630 PNG 卡片预览和下载入口
 - `/methodology` 数据口径：解释 schema、置信度、闭关估算和复核逻辑
+- `/privacy` 隐私与广告：广告脚本、Cookie、数据边界和 `ads.txt` 准备说明
+- `/en` 英文版入口：英文导航、SEO alternate、英文数据说明和同一套数据库镜像
 
 ## 技术栈
 
@@ -108,6 +112,35 @@ https://hanli-life-database.pages.dev
 ```bash
 NEXT_PUBLIC_SITE_URL=https://your-domain.example npm run build:cloudflare
 ```
+
+## Google 广告准备
+
+广告脚本默认不会加载。只有配置对应环境变量后，构建产物才会带上 Google 脚本或有效 `ads.txt`。
+
+```bash
+# AdSense auto ads
+NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
+NEXT_PUBLIC_ADSENSE_PUBLISHER_ID=pub-xxxxxxxxxxxxxxxx
+
+# Google tag / Google Ads measurement
+NEXT_PUBLIC_GOOGLE_TAG_ID=G-XXXXXXXXXX
+# 或
+NEXT_PUBLIC_GOOGLE_ADS_ID=AW-XXXXXXXXXX
+```
+
+相关文件：
+
+- `src/components/ads/GoogleAdsScripts.tsx`
+- `src/app/ads.txt/route.ts`
+- `src/app/privacy/page.tsx`
+- `src/app/en/privacy/page.tsx`
+
+上线 AdSense 审核前，至少确认：
+
+- `https://hanli-life-database.pages.dev/ads.txt` 返回真实 `pub-...`
+- 隐私与广告页可访问
+- 英文版 `/en`、`/en/events`、`/en/timeline` 可访问
+- 站点仍然不展示小说原文全文，只展示结构化字段和摘要
 
 ## 仓库边界
 

@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import { TopBar } from "@/components/chrome/TopBar";
 import { SideRail } from "@/components/chrome/SideRail";
 import { Footer } from "@/components/chrome/Footer";
+import { GoogleAdsScripts } from "@/components/ads/GoogleAdsScripts";
 
 export const metadata: Metadata = {
   title: "韩立人生数据库 · Han Li · Life Database",
@@ -12,6 +13,12 @@ export const metadata: Metadata = {
     title: "韩立人生数据库",
     description: "一份算得清楚的修仙履历。",
     type: "website",
+  },
+  alternates: {
+    languages: {
+      "zh-CN": "/",
+      en: "/en",
+    },
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
 };
@@ -25,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <body>
+        <GoogleAdsScripts />
         <div className="shell">
           <TopBar initialColorMode="paper" initialFont="song" />
           <div className="layout">

@@ -1471,6 +1471,13 @@ input, select, textarea { font-family: inherit; }
   gap: 3px;
   margin-left: 10px;
 }
+.lang-switch {
+  margin-left: auto;
+  white-space: nowrap;
+}
+.topbar__meta + .lang-switch {
+  margin-left: 10px;
+}
 .theme-toggle button {
   min-width: 26px;
   height: 24px;
@@ -1709,9 +1716,19 @@ input, select, textarea { font-family: inherit; }
     display: none;
   }
   .theme-toggle {
-    margin-left: auto;
+    margin-left: 0;
     flex: none;
     gap: 2px;
+  }
+  .lang-switch {
+    margin-left: auto;
+    flex: none;
+    min-width: 30px;
+    height: 24px;
+    padding: 2px 6px;
+    font-size: 10px;
+    display: inline-flex;
+    align-items: center;
   }
   .theme-toggle button {
     min-width: 24px;

@@ -13,17 +13,20 @@ function baseUrl() {
 }
 
 function allPaths() {
-  return [
+  const zhPaths = [
     "/",
     "/timeline",
     "/events",
     "/realms",
     "/cards",
     "/methodology",
+    "/privacy",
     ...CARD_SLUGS.map((slug) => `/cards/${slug}`),
     ...getRealmProfiles().map((realm) => `/realms/${slugify(realm.realm)}`),
     ...getAllEventIds().map((id) => `/events/${id}`),
   ];
+  const enPaths = zhPaths.map((path) => path === "/" ? "/en" : `/en${path}`);
+  return [...zhPaths, ...enPaths];
 }
 
 export async function generateSitemaps() {
