@@ -6,6 +6,8 @@ import { SideRail } from "@/components/chrome/SideRail";
 import { Footer } from "@/components/chrome/Footer";
 import { GoogleAdsScripts } from "@/components/ads/GoogleAdsScripts";
 
+const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+
 export const metadata: Metadata = {
   title: "韩立人生数据库 · Han Li · Life Database",
   description: "1324 章、1998 事件、22 段境界、3 套闭关口径，全部公开口径与置信度。",
@@ -31,6 +33,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-font="song"
       suppressHydrationWarning
     >
+      <head>
+        {adsenseClient ? (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+            crossOrigin="anonymous"
+          />
+        ) : null}
+      </head>
       <body>
         <GoogleAdsScripts />
         <div className="shell">
