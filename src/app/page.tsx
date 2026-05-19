@@ -127,7 +127,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <SectionHeader kicker="三条主入口" en="START HERE" title="进入数据库" />
+      <SectionHeader kicker="四条主入口" en="START HERE" title="进入数据库" />
       <div className="entries">
         <Link className="entry" href="/timeline">
           <span className="eyebrow">人生时间轴</span>
@@ -146,6 +146,15 @@ export default async function Home() {
             {realms.length} 段境界档案。每段都列出战斗、击杀、跑路、宝物、秘境、人物、置信度。
           </div>
           <div className="go">打开境界档案</div>
+        </Link>
+        <Link className="entry gold" href="/treasures">
+          <span className="eyebrow gold">韩老魔的储物袋</span>
+          <div className="num num--gold tnum">{o.treasureChapters}</div>
+          <div className="h">看资产如何进出储物袋</div>
+          <div className="d">
+            法宝、丹药、功法、材料和战利品按入袋章节整理；已消耗或离袋的物品会灰显。
+          </div>
+          <div className="go">打开储物袋</div>
         </Link>
         <Link className="entry jade" href="/cards">
           <span className="eyebrow jade">分享卡</span>

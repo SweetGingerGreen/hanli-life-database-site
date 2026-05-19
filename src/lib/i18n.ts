@@ -59,9 +59,10 @@ export const NAV_COPY = [
   { key: "timeline", href: "/timeline", zh: "人生时间轴", en: "Timeline", eyebrow: "TIMELINE", no: "01" },
   { key: "realms", href: "/realms", zh: "境界档案", en: "Realm Profiles", eyebrow: "REALMS", no: "02" },
   { key: "events", href: "/events", zh: "事件库", en: "Events DB", eyebrow: "EVENTS DB", no: "03" },
-  { key: "cards", href: "/cards", zh: "分享卡", en: "Share Cards", eyebrow: "SHARE CARDS", no: "04" },
-  { key: "methodology", href: "/methodology", zh: "数据口径", en: "Methodology", eyebrow: "METHODOLOGY", no: "05" },
-  { key: "privacy", href: "/privacy", zh: "隐私与广告", en: "Privacy & Ads", eyebrow: "PRIVACY", no: "06" },
+  { key: "treasures", href: "/treasures", zh: "韩老魔的储物袋", en: "Storage Pouch", eyebrow: "POUCH", no: "04" },
+  { key: "cards", href: "/cards", zh: "分享卡", en: "Share Cards", eyebrow: "SHARE CARDS", no: "05" },
+  { key: "methodology", href: "/methodology", zh: "数据口径", en: "Methodology", eyebrow: "METHODOLOGY", no: "06" },
+  { key: "privacy", href: "/privacy", zh: "隐私与广告", en: "Privacy & Ads", eyebrow: "PRIVACY", no: "07" },
 ] as const;
 
 export function navForPath(pathname: string) {

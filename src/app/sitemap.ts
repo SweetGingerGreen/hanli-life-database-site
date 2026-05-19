@@ -18,6 +18,7 @@ function allPaths() {
     "/timeline",
     "/events",
     "/realms",
+    "/treasures",
     "/cards",
     "/methodology",
     "/privacy",

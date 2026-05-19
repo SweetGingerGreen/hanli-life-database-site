@@ -160,6 +160,13 @@ export default async function EnglishHome() {
           <div className="d">Trace individual records back to chapter number, realm, event type, linked fields, and extraction quality.</div>
           <div className="go">Open events</div>
         </Link>
+        <Link className="entry gold" href="/en/treasures">
+          <span className="eyebrow gold">Storage pouch</span>
+          <div className="num num--gold tnum">{o.treasureChapters}</div>
+          <div className="h">Track Han Li&apos;s inventory</div>
+          <div className="d">Treasures, pills, manuals, materials, and loot are organized by acquisition chapter; items that left the pouch are greyed.</div>
+          <div className="go">Open pouch</div>
+        </Link>
       </div>
 
       <div className="note" style={{ marginTop: 32 }}>
